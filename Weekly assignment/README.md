@@ -1,13 +1,21 @@
-# Second Week - Exercice 2
+# Third Week
 
 ## Exercice topic
-This exercice's goal is to learn how to use TypeScript
+This exercice's goal is to learn how to use Storage and Unit testing
 
 ## Run instructions
 	1. Launching with "npm start"
 	2. First page explains how it all works
-	3. Type /hello/your_name to access a second page where you'll find personalized greetings and a button
-	4. Once pressed the button will display metrics stored locally
+	3. Type /metrics to see all the metrics
+	4. Type /metrics/id to see only metrics of given id
+	5. The POST request /metrics/delete/id deletes a metric based on its key
+
+## Testing instructions
+You can run tests with "npm test"
+Tests are implemented for the following functions:
+	1. Save
+	2. Get
+	3. Delete
 
 Arnaud Emprin
 SI International Group 1
