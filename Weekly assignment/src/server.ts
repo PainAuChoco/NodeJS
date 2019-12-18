@@ -35,10 +35,10 @@ app.use(session({
     saveUninitialized: true,
 }))
 
-app.use(function(req: any, res: any, next) {
+app.use(function (req: any, res: any, next) {
     res.locals.user = req.session.user;
     next();
-  });
+});
 
 authRouter.get('/login', (req: any, res: any) => {
     res.render('login')
@@ -81,28 +81,6 @@ authRouter.post('/login', (req: any, res: any) => {
 app.use(authRouter)
 const userRouter = express.Router()
 
-userRouter.post('/', (req: any, res: any, next: any) => {
-    dbUser.get(req.body.username, function (err: Error | null, result?: User) {
-        if (!err || result !== undefined) {
-            res.status(409).send("user already exists")
-        } else {
-            dbUser.save(req.body, function (err: Error | null) {
-                if (err) next(err)
-                else res.status(201).send("user persisted")
-            })
-        }
-    })
-})
-
-
-userRouter.get('/:username', (req: any, res: any, next: any) => {
-    dbUser.get(req.params.username, function (err: Error | null, result?: User) {
-        if (err || result === undefined) {
-            res.status(404).send("user not found")
-        } else res.status(200).json(result)
-    })
-})
-
 app.use('/user', userRouter)
 
 const authCheck = function (req: any, res: any, next: any) {
@@ -128,52 +106,66 @@ app.post('/user/update', (req: any, res: any) => {
     res.redirect('/account')
 })
 
-app.post('/user/delete', (req: any, res: any)=>{
+app.post('/user/delete', (req: any, res: any) => {
     dbUser.delete(req.body.username, (err: Error | null) => {
         if (err) throw err
         res.redirect('/logout')
     })
 })
 
-app.post('/user/deleteadmin', (req: any, res: any)=>{
+app.post('/user/deleteadmin', (req: any, res: any) => {
     dbUser.delete(req.body.username, (err: Error | null) => {
         if (err) throw err
         res.redirect('/admin')
     })
 })
 
-app.get('/admin', authCheck, (req: any, res: any)=> {
+app.get('/admin', authCheck, (req: any, res: any) => {
     dbUser.getAll((err: Error | null, result: any) => {
-        if(err) throw err
-        res.render('admin.ejs', {users: result})
+        if (err) throw err
+        res.render('admin.ejs', { users: result })
     })
 })
 
 app.post('/metrics', (req: any, res: any) => {
     let metric: Metric = new Metric(req.body.timestamp, req.body.value, req.body.id)
-    dbMet.save(req.body.id, req.session.user.username, metric, (err: Error | null) => {
-        if (err) throw err
-        //res.status(200).send('ok')
-        res.redirect("/metrics");
-    })
+    if (req.session.user === undefined || req.session.user === null) {
+        dbMet.save(req.body.id, req.body.username, metric, (err: Error | null) => {
+            if (err) throw err
+            res.status(200).send('metric successfully added');
+        })
+    } else {
+        dbMet.save(req.body.id, req.session.user.username, metric, (err: Error | null) => {
+            if (err) throw err
+            res.redirect("/metrics");
+        })
+    }
 })
 
 
 app.get('/metrics/:id', (req: any, res: any) => {
-    dbMet.getOne(req.params.id, req.session.user.username, (err: Error | null, result: any) => {
-        if (err) throw err
-        //res.status(200).send(result)
-        res.render('metrics.ejs', { metrics: result });
-    })
-})
-
-app.get('/metrics/', (req: any, res: any) => {
-    dbMet.getAll(req.session.user.username,
-        (err: Error | null, result: any) => {
+    if (req.session.user === undefined || req.session.user === null) {
+        res.status(401).send('User not logged')
+    } else {
+        dbMet.getOne(req.params.id, req.session.user.username, (err: Error | null, result: any) => {
             if (err) throw err
             //res.status(200).send(result)
             res.render('metrics.ejs', { metrics: result });
         })
+    }
+})
+
+app.get('/metrics/', (req: any, res: any) => {
+    if (req.session.user === undefined || req.session.user === null) {
+        res.status(401).send('User not logged')
+    } else {
+        dbMet.getAll(req.session.user.username,
+            (err: Error | null, result: any) => {
+                if (err) throw err
+                //res.status(200).send(result)
+                res.render('metrics.ejs', { metrics: result });
+            })
+    }
 })
 
 app.post('/metrics/delete', (req: any, res: any) => {
@@ -184,23 +176,18 @@ app.post('/metrics/delete', (req: any, res: any) => {
     })
 })
 
-app.post('/metrics/deleteall', (req: any, res: any) => {
-    dbMet.getAll("admin",
-        (err: Error | null, result: any) => {
-            if (err) throw err
-            result.forEach(metric => {
-                dbMet.delete(metric.key, (err: Error | null) => {
-                    if (err) throw err
-                    res.status(200).send("all metrics deleted")
-                })
-            });
-        })
-})
-
 app.get('/users', (req: any, res: any) => {
     dbUser.getAll((err: Error | null, result: any) => {
         if (err) throw err
         res.status(200).send(result)
+    })
+})
+
+app.get('/users/:username', (req: any, res: any, next: any) => {
+    dbUser.get(req.params.username, function (err: Error | null, result?: User) {
+        if (err || result === undefined) {
+            res.status(404).send("user not found")
+        } else res.status(200).json(result)
     })
 })
 

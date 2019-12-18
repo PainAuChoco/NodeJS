@@ -28,10 +28,12 @@ describe('User', function () {
         it("should get user", function () {
             let user: User = new User("username", "email", "password")
             dbUser.save(user, function () {
-                dbUser.get("username", function (err: Error | null, result?: User) {
-                    expect(result).to.not.be.undefined
-                    if (result !== undefined && result !== null) expect(result.username).to.be.equal("username")
-                })
+                setTimeout(() => {
+                    dbUser.get("username", function (err: Error | null, result?: User) {
+                        expect(result).to.not.be.undefined
+                        if (result !== undefined && result !== null) expect(result.username).to.be.equal("username")
+                    })
+                }, 1000);
             })
         })
     })
@@ -43,10 +45,12 @@ describe('User', function () {
                 user.email = "new_email"
                 dbUser.save(user, function (err: Error | null) {
                     if (err !== null) {
-                        dbUser.get("username", function (err: Error | null, result?: User) {
-                            expect(result).to.not.be.undefined
-                            if (result !== undefined && result !== null) expect(result.email).to.be.equal("new_email")
-                        })
+                        setTimeout(() => {
+                            dbUser.get("username", function (err: Error | null, result?: User) {
+                                expect(result).to.not.be.undefined
+                                if (result !== undefined && result !== null) expect(result.email).to.be.equal("new_email")
+                            })
+                        }, 1000);
                     }
                 })
             })
@@ -58,9 +62,11 @@ describe('User', function () {
             let user: User = new User("username", "email", "password")
             dbUser.save(user, function (err: Error | null) {
                 if (err !== null) {
-                    dbUser.delete("username", function (err: Error | null) {
-                        expect(err).to.be.null;
-                    })
+                    setTimeout(() => {
+                        dbUser.delete("username", function (err: Error | null) {
+                            expect(err).to.be.null;
+                        })
+                    }, 1000)
                 }
             })
         })
