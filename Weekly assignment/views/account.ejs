@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include partials/head.ejs %>
+</head>
+
+<% include partials/navbar.ejs %>
+
+
+<body>
+    <div class="d-flex justify-content-center">
+        <div>
+            <div id="info">
+                <h2>Personnal information</h2>
+                <ul>
+                    <li>Username : <%= user.username %></li>
+                    <li>Email address : <%= user.email %></li>
+                </ul>
+            </div>
+            <div id="update">
+                <h2>Update your profile</h2>
+                <form action="/user/update" method="post" class="text-center">
+                    <label for="value">Email</label>
+                    <input type="text" id="email" class="form-control" name="email" value="<%= user.email%>" />
+                    <input type="submit" value="Apply changes" class="btn btn-info btn-block my-4 mt-1" />
+                </form>
+            </div>
+            <div id="delete">
+                <form action='/user/delete' method="post" class="text-center">
+                    <input id="username" name="username" value="<%= user.username%>" type="text" hidden>
+                    <input type="submit" value="Delete my account" class="btn btn-danger btn-block my-4 mt-1"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

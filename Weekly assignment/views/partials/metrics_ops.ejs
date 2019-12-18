@@ -1,0 +1,43 @@
+<div class="d-flex align-items-center ml-4">
+
+    <div id="add" class="mr-5">
+        <h1 class="text-center">Add</h1>
+        <form action="/metrics" method="post" class="text-center">
+            <label for="id">Id</label>
+            <input type="text" id="id" class="form-control mt" name="id" />
+            <label for="timestamp">Timestamp</label>
+            <input type="date" id="timestamp" class="form-control" name="timestamp" />
+            <label for="value">Value</label>
+            <input type="number" id="value" class="form-control" name="value" />
+            <input type="submit" value="Insert" class="btn btn-info btn-block my-4 mt-1" />
+        </form>
+    </div>
+    <div id="update">
+        <h1 class="text-center">Update</h1>
+        <select class="form-control mt-5" form="updateform" name="id" id="selectidupdt">
+            <% for (var i =0; i < metrics.length ; i++ ) { %>
+            <option value="<%- metrics[i].key%>"><%= metrics[i].timestamp %> : <%= metrics[i].value %></option>
+            <% } %>
+        </select>
+
+        <form id="updateform" action='/metrics' method="post" class="text-center">
+            <label for="timestamp">Timestamp</label>
+            <input type="date" id="timestamp" class="form-control" name="timestamp" />
+            <label for="value">Value</label>
+            <input type="number" id="value" class="form-control" name="value" />
+            <input type="submit" value="Update" class="btn btn-info btn-block my-4 mt-1" />
+        </form>
+    </div>
+    <div id="delete" class="ml-5">
+        <h1 class="text-center">Delete</h1>
+        <select class="form-control mt-5" form="dltform" name="id" id="id">
+            <% for (var i =0; i < metrics.length ; i++ ) { %>
+            <option value="<%- metrics[i].key%>"><%= metrics[i].timestamp %> : <%= metrics[i].value %></option>
+            <% } %>
+        </select>
+        <form id="dltform" action='/metrics/delete' method="post" class="text-center">
+            <input type="submit" value="Delete" class="btn btn-info btn-block my-4 mt-1" />
+        </form>
+    </div>
+</div>
+</body>

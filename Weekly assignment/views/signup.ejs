@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include partials/head.ejs %>
+</head>
+
+<% include partials/navbar.ejs %>
+
+<div id="form">
+    <div class="d-flex justify-content-center">
+        <form action="/signup" method="post" class="text-center col-sm-4"">
+        <p class=" h1 mt-5">Sign up</p>
+            <input type="text" id="username" class="form-control mt-5" placeholder="Username" autoFocus  name="username"/>
+            <input type="email" id="email" class="form-control mt-4" placeholder="Email" autoFocus  name="email"/>
+            <input type="password" id="password" class="form-control mt-4" placeholder="Password"  name="password"/>
+
+            <input type="submit" value="Submit" class="btn btn-info btn-block my-4 mt-5" />
+        </form>
+    </div>
+</div>

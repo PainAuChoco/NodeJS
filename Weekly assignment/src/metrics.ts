@@ -22,7 +22,7 @@ export class MetricsHandler {
     //callback(null)
   }
 
-  public get(key: string, callback: (error: Error | null, result?: Metric[]) => void) {
+  public get(key: string, callback: (error: Error | null, result?: Metric) => void) {
     const result = this.db.get(key);
     callback(null, result)
   }
@@ -48,15 +48,12 @@ export class MetricsHandler {
         }
       })
       .on('error', function (err: any) {
-        console.log('Oh my!', err)
         callback(err, null)
       })
       .on('close', function () {
-        console.log('Stream closed')
       })
       .on('end', function () {
         callback(null, metrics)
-        console.log('Stream ended')
       })
   }
 
@@ -77,15 +74,12 @@ export class MetricsHandler {
 
       })
       .on('error', function (err: any) {
-        console.log('Oh my!', err)
         callback(err, null)
       })
       .on('close', function () {
-        console.log('Stream closed')
       })
       .on('end', function () {
         callback(null, metrics)
-        console.log('Stream ended')
       })
 
   }

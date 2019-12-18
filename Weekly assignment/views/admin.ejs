@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include partials/head.ejs %>
+</head>
+
+<% include partials/navbar.ejs %>
+
+
+<body>
+    <div class="d-flex justify-content-center">
+        <div id="users" class="col-sm-4">
+            <h2>Users</h2>
+            <% users.forEach(user => { %>
+            <div class="list-group-item list-group-item-action">
+                <%= user.username %>
+                <form action="user/deleteadmin" method="post" class="float-right">
+                    <input id="username" name="username" value="<%= user.username%>" type="text" hidden>
+                    <input class="btn btn-danger float-right btn-sm" value="Delete" type="submit" />
+                </form>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+
+</body>
