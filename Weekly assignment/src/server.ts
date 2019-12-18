@@ -57,7 +57,7 @@ authRouter.post('/signup/', (req: any, res: any) => {
     })
     req.session.loggedIn = true
     req.session.user = newuser
-    res.redirect('/metrics')
+    res.redirect('/')
 })
 
 authRouter.get('/logout', (req: any, res: any) => {
@@ -73,7 +73,7 @@ authRouter.post('/login', (req: any, res: any) => {
         } else {
             req.session.loggedIn = true
             req.session.user = result
-            res.redirect('/metrics')
+            res.redirect('/')
         }
     })
 })
