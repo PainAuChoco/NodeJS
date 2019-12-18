@@ -14,5 +14,5 @@ export class LevelDB {
         if (fs.existsSync(path)) {
           del.sync(path, { force: true })
         }
-      }
+    }
 }
