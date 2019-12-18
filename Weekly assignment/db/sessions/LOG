@@ -1,14 +1,5 @@
-2019/12/15-13:18:15.714 372c Recovering log #770
-2019/12/15-13:18:15.714 372c Level-0 table #772: started
-2019/12/15-13:18:15.724 372c Level-0 table #772: 188 bytes OK
-2019/12/15-13:18:15.732 372c Delete type=0 #770
-2019/12/15-13:18:15.733 372c Delete type=3 #768
-2019/12/15-13:18:15.733 2dbc Compacting 4@0 + 1@1 files
-2019/12/15-13:18:15.737 2dbc Generated table #774@0: 12 keys, 888 bytes
-2019/12/15-13:18:15.737 2dbc Compacted 4@0 + 1@1 files => 888 bytes
-2019/12/15-13:18:15.740 2dbc compacted to: files[ 0 1 0 0 0 0 0 ]
-2019/12/15-13:18:15.740 2dbc Delete type=2 #761
-2019/12/15-13:18:15.740 2dbc Delete type=2 #763
-2019/12/15-13:18:15.740 2dbc Delete type=2 #766
-2019/12/15-13:18:15.741 2dbc Delete type=2 #769
-2019/12/15-13:18:15.741 2dbc Delete type=2 #772
+2019/12/18-09:03:43.408 231c Recovering log #773
+2019/12/18-09:03:43.408 231c Level-0 table #776: started
+2019/12/18-09:03:43.450 231c Level-0 table #776: 188 bytes OK
+2019/12/18-09:03:43.456 231c Delete type=0 #773
+2019/12/18-09:03:43.456 231c Delete type=3 #771
