@@ -1,7 +1,7 @@
 #!/usr/bin/env ts-node
 
-import { Metric, MetricsHandler } from '../src/metrics'
-import { User, UserHandler } from '../src/user'
+import { Metric, MetricsHandler } from '../src/controllers/metrics'
+import { User, UserHandler } from '../src/controllers/user'
 import { LevelDB } from "../src/leveldb"
 
 const dbPathMet: string = './db/metrics'
