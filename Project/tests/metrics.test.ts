@@ -1,6 +1,6 @@
 import { expect } from 'chai'
-import { Metric, MetricsHandler } from './metrics'
-import { LevelDB } from "./leveldb"
+import { Metric, MetricsHandler } from '../src/controllers/metrics'
+import { LevelDB } from "../src/leveldb"
 
 const dbPath: string = 'db_test_metrics'
 var dbMet: MetricsHandler
@@ -45,7 +45,7 @@ describe('Metrics', function () {
       dbMet.save("key", "username", metric, function (err: Error | null) {
         metric.value = 12
         dbMet.save("key", "username", metric, function (err: Error | null) {
-          dbMet.get("key", function (err: Error | null, result?: Metric) {
+          dbMet.getOne("key","username", function (err: Error | null, result?: Metric) {
             expect(result).to.not.be.undefined
             if (result !== undefined && result !== null && result.value !== undefined) expect(result.value).to.be.equal(12)
           })
@@ -58,10 +58,12 @@ describe('Metrics', function () {
     it("should delete data", function () {
       let metric: Metric = new Metric("010101", 1, "key")
       dbMet.save("key", "username", metric, function (err: Error | null) {
-        if (err !== null) {
-          dbMet.delete("key", function (err: Error | null) {
-            expect(err).to.be.null;
-          })
+        if (err === null) {
+          setTimeout(() => {
+            dbMet.delete("key", function (err: Error | null) {
+              expect(err).to.be.null;
+            })
+          }, 2000);
         }
       })
     })

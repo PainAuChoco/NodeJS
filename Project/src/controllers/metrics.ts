@@ -1,4 +1,4 @@
-import { LevelDB } from './leveldb'
+import { LevelDB } from '../leveldb'
 import WriteStream from 'level-ws'
 
 
