@@ -26,12 +26,14 @@
                     <input type="submit" value="Apply changes" class="btn btn-dark btn-block my-4 mt-1" />
                 </form>
             </div>
+            <% if(user.username !== "admin") {%>
             <div id="delete">
                 <form action='/user/delete' method="post" class="text-center">
                     <input id="username" name="username" value="<%= user.username%>" type="text" hidden>
                     <input type="submit" value="Delete my account" class="btn btn-danger btn-block my-4 mt-1"/>
                 </form>
             </div>
+            <% } %>
         </div>
     </div>
 </body>
