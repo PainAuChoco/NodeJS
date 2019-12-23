@@ -2,12 +2,12 @@ import express = require('express')
 import bodyparser = require('body-parser')
 import session = require('express-session')
 import levelSession = require('level-session-store')
-var morgan = require('morgan')
+import morgan = require('morgan')
+
+var path = require('path')
 
 const LevelStore = levelSession(session)
-
 const app = express()
-var path = require('path')
 const port: string = process.env.PORT || '1337'
 
 app.use(express.static(path.join(__dirname, '/../public')))
