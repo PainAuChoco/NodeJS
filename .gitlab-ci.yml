@@ -1,0 +1,19 @@
+image: node:latest 
+
+before_script:
+  - cd Project
+  - npm install
+stages:
+  - test
+  - build
+
+test_job:
+
+  stage: test
+  script:
+    - npm test
+  
+populate_job:
+  stage: build
+  script:
+    - npm build
