@@ -3,8 +3,7 @@ import bodyparser = require('body-parser')
 import session = require('express-session')
 import levelSession = require('level-session-store')
 import morgan = require('morgan')
-
-var path = require('path')
+import path = require('path')
 
 const LevelStore = levelSession(session)
 const app = express()
