@@ -20,12 +20,29 @@
  3. On the accout page, you can modify your email adress or delete your account
  4. Log in as an admin (username = "admin", password ="admin") to check the admin page. You can delete any user here.
 
+ ## Routes
+ 
+ 1. /signup
+ 2. /login
+
+ Once logged in you can access: <br/>
+ 1. /metrics
+ 2. /account
+ 3. /admin if you're admin
+
  ## GitLab
 
  Link to GitLab Project : https://gitlab.com/PainAuChoco/NodeJS/ <br/>
  The pipeline of CI is composed of 2 stages<br/>
  1. Test
  2. Build
+
+ ## Encoutered difficulties 
+ 
+ 1. Lot of information with hundred of new dependencies to ingest at the beginning of the class.
+ 2. Test strange failure because of asynchronous JS functions
+ 3. Splitting up code
+ 4. Using Docker outside of GitLab pipeline
 
 Arnaud Emprin and Jean Leroy<br/>
 SI International Group 1<br/>
