@@ -1,4 +1,4 @@
 Project/node_modules
 Project/db
-Project/db/db_test_users
-Project/db/db_test_metrics
+Project/db_test_users
+Project/db_test_metrics
