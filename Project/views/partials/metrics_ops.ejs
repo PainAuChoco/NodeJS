@@ -3,7 +3,7 @@
     <div id="add" class="mr-5">
         <h1 class="text-center">Add</h1>
         <form action="/metrics" method="post" class="text-center">
-            <label for="id">Id</label>
+            <label for="id">Key</label>
             <input type="text" id="id" class="form-control mt" name="id" />
             <label for="timestamp">Timestamp</label>
             <input type="date" id="timestamp" class="form-control" name="timestamp" />
@@ -21,9 +21,9 @@
         </select>
 
         <form id="updateform" action='/metrics' method="post" class="text-center">
-            <label for="timestamp">Timestamp</label>
+            <label for="timestamp">New Timestamp</label>
             <input type="date" id="timestamp" class="form-control" name="timestamp" />
-            <label for="value">Value</label>
+            <label for="value">New Value</label>
             <input type="number" id="value" class="form-control" name="value" />
             <input type="submit" value="Update" class="btn btn-info btn-block my-4 mt-1" />
         </form>
